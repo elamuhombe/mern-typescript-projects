@@ -10,6 +10,7 @@ interface ITask extends Document {
     avatarUrl: string; // URL or path to avatar image
   };
   category: 'recently' | 'today' | 'upcoming' | 'later'; // Task category field
+  progress: number; // Progress status (percentage)
 }
 
 // Create Mongoose schema for Task
@@ -25,7 +26,11 @@ const taskSchema = new Schema<ITask>({
     type: String,
     enum: ['recently', 'today', 'upcoming', 'later'],
     default: 'today'
-  }
+  },
+  progress: { type: Number, default: 0, min: 0, max: 100 } // Progress status (percentage)
+  
+
+  
 }, { timestamps: true });
 
 // Create Mongoose model based on the schema
